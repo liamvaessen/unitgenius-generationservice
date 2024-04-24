@@ -108,5 +108,3 @@ jobs:
         file: ./docker/Dockerfile
         push: true
         tags: liamvaessen/unitgenius-generationservice:latest
-
-      
