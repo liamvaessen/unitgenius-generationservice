@@ -17,10 +17,10 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./GenerationService/GenerationService
+      working-directory: ./GenerationService/UnitGenius-GenerationService
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ./GenerationService/GenerationService
+      working-directory: ./GenerationService/UnitGenius-GenerationService
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -33,13 +33,13 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./GenerationService/GenerationServiceTests
+      working-directory: ./GenerationService/UnitGenius-GenerationServiceTests
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ./GenerationService/GenerationServiceTests
+      working-directory: ./GenerationService/UnitGenius-GenerationServiceTests
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ./GenerationService/GenerationServiceTests
+      working-directory: ./GenerationService/UnitGenius-GenerationServiceTests
 
   docker-build-push-development:
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
     - name: Build Docker image
       uses: docker/build-push-action@v2
       with:
-        context: ./GenerationService/GenerationService
+        context: ./GenerationService/UnitGenius-GenerationService
         file: ./docker/Dockerfile
         push: true
         tags: liamvaessen/unitgenius-generationservice:development
@@ -104,7 +104,7 @@ jobs:
     - name: Build Docker image
       uses: docker/build-push-action@v2
       with:
-        context: ./GenerationService/GenerationService
+        context: ./GenerationService/UnitGenius-GenerationService
         file: ./docker/Dockerfile
         push: true
         tags: liamvaessen/unitgenius-generationservice:latest
