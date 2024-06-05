@@ -36,11 +36,11 @@ namespace UnitGenius_GenerationService.Service
             string codeSnippet = request.Code.Replace("\"", string.Empty);
             var messages = new[]
             {
-                new {role = "user", content = $"Explain what this snippet does:{codeSnippet}"}
+                new {role = "user", content = $"Explain what this snippet does. Emphasize on the functions and not the variables and properties.:{codeSnippet}"}
             };
             var data = new
             {
-                model = "gpt-3.5-turbo",
+                model = "gpt-4o",
                 messages = messages,
                 temperature = 1,
                 max_tokens = 500
