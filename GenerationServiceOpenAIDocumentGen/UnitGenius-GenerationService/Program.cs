@@ -53,7 +53,7 @@ class Program
             try
             {
                 Console.WriteLine("Trying to instantiate services...");
-                string apikey = configuration["OpenAI:ApiKey"] ?? throw new ArgumentNullException("OpenAI:ApiKey");
+                string apikey = configuration["OpenAI_ApiKey"] ?? throw new ArgumentNullException("OpenAI_ApiKey");
                 // Create a new instance of the UnitTestGenerationService
                 var unitTestGenerationService = new UnitTestGenerationService(apikey);
 

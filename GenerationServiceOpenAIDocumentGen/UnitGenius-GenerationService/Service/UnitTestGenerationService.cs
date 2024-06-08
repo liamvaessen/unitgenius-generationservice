@@ -36,7 +36,7 @@ namespace UnitGenius_GenerationService.Service
             string codeSnippet = request.Code.Replace("\"", string.Empty);
             var messages = new[]
             {
-                new {role = "user", content = $"Explain what this snippet does. Emphasize on the functions and not the variables and properties.:{codeSnippet}"}
+                new {role = "user", content = $"Explain what this snippet does. Emphasize on the functions and not the variables and properties. Only return the explanation of the function:{codeSnippet}"}
             };
             var data = new
             {
