@@ -33,10 +33,9 @@ namespace UnitGenius_GenerationService.Service
                 request.Status = Status.Failed;
                 throw new ArgumentException("Code is required for generating unit tests.");
             }
-            string codeSnippet = request.Code.Replace("\"", string.Empty);
             var messages = new[]
             {
-                new {role = "user", content = $"Explain what this snippet does. Emphasize on the functions and not the variables and properties. Only return the explanation of the function:{codeSnippet}"}
+                new {role = "user", content = $"Explain what this snippet does. Emphasize on the function in the snippet. Return only the function expanation:{request}"}
             };
             var data = new
             {
@@ -49,8 +48,10 @@ namespace UnitGenius_GenerationService.Service
             var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("completions", content);
 
-            string result = await response.Content.ReadAsStringAsync();
-            request.Result = result.ToString();
+            var result = await response.Content.ReadAsStringAsync();
+            dynamic jsonResponse = JsonConvert.DeserializeObject(result);
+            string messageContent = jsonResponse.choices[0].message.content;
+            request.Result = messageContent.ToString();
             request.Status = Status.Completed;
             return request;
 
